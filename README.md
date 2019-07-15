@@ -12,6 +12,6 @@ Instale o Docker e as dependencias:
 
 ## Como executar localmente
 
-Com o seu [bot de telegram](https://core.telegram.org/bots) já criado e a chave da API para acessá-lo em mãos
-Defina a variável de ambiente BOT_API_KEY com `export BOT_API_KEY=suachave`. 
-Execute com: `make docker-run`
+* Com o seu [bot de telegram](https://core.telegram.org/bots) já criado e a chave da API para acessá-lo em mãos
+* Defina a variável de ambiente BOT_API_KEY com `export BOT_API_KEY=suachave`. 
+* Execute com: `make docker-run`

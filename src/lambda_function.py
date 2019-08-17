@@ -36,7 +36,7 @@ class AgendaBolsoCrawler:
         items_agenda = []
         day_string = day.strftime("%Y-%m-%d")
         print('Dia: '+day_string)
-        self.driver.get('http://www2.planalto.gov.br/acompanhe-o-planalto/agenda-do-presidente-da-republica/' + day_string)
+        self.driver.get('https://www.gov.br/planalto/pt-br/acompanhe-o-planalto/agenda-do-presidente-da-republica/' + day_string)
         time.sleep(5)
         compromissos = self.driver.find_elements_by_class_name("item-compromisso")
         try:
@@ -45,10 +45,10 @@ class AgendaBolsoCrawler:
                 titulo = compromisso.find_element_by_xpath(".//h4[@class='compromisso-titulo']").text + '\n'
                 local = '*Local:* ' + compromisso.find_element_by_xpath(".//p[@class='compromisso-local']").text + '\n'
                 items_agenda.append([horario,titulo,local])
-            self.send_to_chats(items_agenda, day_string)
+            if(items_agenda):
+                self.send_to_chats(items_agenda, day_string)
         except:
             print('Not Found')
-            self.send_to_chats(['Nenhum Compromisso Registrado'], day_string)
     
     def send_to_chats(self,rows, day_string):
         chats = []
@@ -62,6 +62,8 @@ class AgendaBolsoCrawler:
                 print('empity message')
         #deduplicate
         chats = list(set(chats))
+        print(chats)
+        print(string_rows)
         for chat in chats:
             BOT_INSTANCE.sendMessage(chat, string_rows, parse_mode='markdown')
 
